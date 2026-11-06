@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
 :root { --ink:#0c0806; --walnut:#2a1a12; --brass:#c8a25a; --paper:#f4ead7; --absolut:#0a3fa8; }
 * { box-sizing: border-box; }
@@ -30,7 +31,6 @@ button { font:inherit; font-weight:500; padding:.85rem 1.4rem; border-radius:2px
 button.ghost { background:transparent; border-color:var(--brass); color:var(--paper); }
 button:disabled { opacity:.4; cursor:not-allowed; }
 button:focus-visible, .age input:focus-visible { outline:2px solid var(--brass); outline-offset:3px; }
-.fine { margin:1.2rem 0 0; font-size:.85rem; opacity:.75; }
 
 .hud { position:fixed; left:max(16px, env(safe-area-inset-left)); bottom:max(16px, env(safe-area-inset-bottom));
   z-index:9; display:flex; flex-wrap:wrap; align-items:center; gap:8px; max-width:calc(100% - 140px); }
@@ -102,7 +102,7 @@ body.film::after { bottom:0; }
   }
   const BRASS = 'color: #c8a25a; metalness: 0.9; roughness: 0.3';
 
-  /* ───────── Procedural textures ───────── */
+  /* Procedural textures */
   const painters = {
     marble(c, w, h) {
       const n = 8, s = w / n, r = rng(7);
@@ -230,7 +230,7 @@ body.film::after { bottom:0; }
     },
   });
 
-  /* ───────── Bottle ───────── */
+  /* Bottle */
   AFRAME.registerComponent('absolut-bottle', {
     schema: { drink: { type: 'string', default: 'original' } },
     init() {
@@ -274,7 +274,7 @@ body.film::after { bottom:0; }
     },
   });
 
-  /* ───────── Choosing a bottle ───────── */
+  /* Choosing a bottle */
   function hint(text) { const h = $('#hint'); if (h) h.textContent = text; }
 
   function select(id) {
@@ -306,7 +306,7 @@ body.film::after { bottom:0; }
     hint(`${d.name} is poured. Choose another bottle to change your drink.`);
   }
 
-  /* ───────── Room ───────── */
+  /* Room */
   function build() {
     const world = $('#world');
 
@@ -394,7 +394,7 @@ body.film::after { bottom:0; }
     }
   }
 
-  /* ───────── Modes ───────── */
+  /* Modes */
   function setMode(mode) {
     state.mode = mode;
     const world = $('#world').object3D, rig = $('#rig').object3D, cam = $('#cam');
@@ -427,8 +427,7 @@ body.film::after { bottom:0; }
     })(t0);
   }
 
-  /* ───────── The film (~20s guided ad) ───────── */
-  // [seconds, rig x, rig y, rig z, yaw deg, pitch deg]
+  /* The film */
   const KEYS = [
     [0, -2.6, -0.2, 2.6, -25, 0],
     [5, -1.0, -0.3, 0.7, -12, 2],
@@ -513,7 +512,7 @@ body.film::after { bottom:0; }
     $('#hud').hidden = false;
   }
 
-  /* ───────── Wiring ───────── */
+  /* Wiring */
   document.addEventListener('DOMContentLoaded', () => {
     build();
     const scene = $('a-scene'), hit = $('#hit');
@@ -559,6 +558,7 @@ body.film::after { bottom:0; }
 })();
 </script>
 </head>
+
 <body>
 
 <main id="intro" class="intro">
@@ -610,6 +610,11 @@ body.film::after { bottom:0; }
   loading-screen="backgroundColor: #0c0806; dotsColor: #c8a25a"
   vr-mode-ui="enabled: true">
 
+  <!-- Load the Absolut ad image from the same folder as this HTML file -->
+  <a-assets>
+    <img id="absolut-ad" src="ad.jpg" crossorigin="anonymous">
+  </a-assets>
+
   <a-entity light="type: ambient; color: #ffd7a8; intensity: 0.9"></a-entity>
   <a-entity light="type: hemisphere; color: #ffe2b8; groundColor: #3a2418; intensity: 0.7"></a-entity>
 
@@ -623,7 +628,7 @@ body.film::after { bottom:0; }
 
   <a-entity id="world">
     <a-plane id="floor" class="clickable" teleport-floor rotation="-90 0 0" width="8" height="7" position="0 0 0"
-             material="roughness: 0.25; metalness: 0.1" gen-texture="kind: marble; repeat: 1 0.875; size: 1024 1024"></a-plane>
+      material="roughness: 0.25; metalness: 0.1" gen-texture="kind: marble; repeat: 1 0.875; size: 1024 1024"></a-plane>
 
     <a-plane position="0 1.7 -3.5" width="8" height="3.4" material="color: #123a30; roughness: 0.95"></a-plane>
     <a-plane position="-4 1.7 0" rotation="0 90 0" width="7" height="3.4" material="color: #123a30; roughness: 0.95"></a-plane>
@@ -643,7 +648,29 @@ body.film::after { bottom:0; }
 
     <a-box position="0 0.5 -3.25" width="5.6" height="1" depth="0.5" material="roughness: 0.6" gen-texture="kind: wood; repeat: 4 1; size: 512 512"></a-box>
     <a-box position="0 1.02 -3.25" width="5.7" height="0.05" depth="0.55" material="color: #f1ede4; roughness: 0.2" gen-texture="kind: slab; size: 512 512"></a-box>
-    <a-plane position="0 2.1 -3.48" width="5.4" height="1.8" material="color: #b9a98a; metalness: 1; roughness: 0.12; emissive: #3a2c1a; emissiveIntensity: 0.6"></a-plane>
+
+    <!-- Back-wall panel behind the framed Absolut advertisement -->
+    <a-plane position="0 2.1 -3.48" width="5.4" height="1.8"
+      material="color: #b9a98a; metalness: 1; roughness: 0.12; emissive: #3a2c1a; emissiveIntensity: 0.6"></a-plane>
+
+    <!-- Vintage gold picture frame -->
+    <a-box position="0 2.1 -3.405" width="1.55" height="1.72" depth="0.075"
+      material="color: #3a2418; roughness: 0.75"></a-box>
+
+    <a-box position="-0.75 2.1 -3.35" width="0.065" height="1.78" depth="0.07"
+      material="color: #c8a25a; metalness: 0.9; roughness: 0.25"></a-box>
+    <a-box position="0.75 2.1 -3.35" width="0.065" height="1.78" depth="0.07"
+      material="color: #c8a25a; metalness: 0.9; roughness: 0.25"></a-box>
+    <a-box position="0 2.96 -3.35" width="1.55" height="0.065" depth="0.07"
+      material="color: #c8a25a; metalness: 0.9; roughness: 0.25"></a-box>
+    <a-box position="0 1.24 -3.35" width="1.55" height="0.065" depth="0.07"
+      material="color: #c8a25a; metalness: 0.9; roughness: 0.25"></a-box>
+
+    <!-- The actual Absolut ad image -->
+    <a-plane position="0 2.1 -3.345" width="1.42" height="1.64"
+      material="shader: flat; src: #absolut-ad; side: double"></a-plane>
+
+    <!-- Existing brass trim around the larger wall panel -->
     <a-box position="0 3.02 -3.47" width="5.5" height="0.06" depth="0.04" material="color: #c8a25a; metalness: 0.9; roughness: 0.3"></a-box>
     <a-box position="0 1.18 -3.47" width="5.5" height="0.06" depth="0.04" material="color: #c8a25a; metalness: 0.9; roughness: 0.3"></a-box>
     <a-box position="-2.72 2.1 -3.47" width="0.06" height="1.9" depth="0.04" material="color: #c8a25a; metalness: 0.9; roughness: 0.3"></a-box>
@@ -661,7 +688,7 @@ body.film::after { bottom:0; }
       <a-cylinder position="0 0.008 0" radius="0.032" height="0.004" material="color: #dff1f6; opacity: 0.4; transparent: true; roughness: 0.05; depthWrite: false"></a-cylinder>
       <a-cylinder position="0 0.053 0" radius="0.004" height="0.09" material="color: #dff1f6; opacity: 0.45; transparent: true; roughness: 0.05; depthWrite: false"></a-cylinder>
       <a-sphere position="0 0.148 0" radius="0.05" theta-start="90" theta-length="90"
-                material="color: #dff1f6; opacity: 0.3; transparent: true; roughness: 0.05; side: double; depthWrite: false"></a-sphere>
+        material="color: #dff1f6; opacity: 0.3; transparent: true; roughness: 0.05; side: double; depthWrite: false"></a-sphere>
       <a-entity id="liquid" position="0 0.148 0" visible="false">
         <a-sphere class="liq" radius="0.047" theta-start="110" theta-length="70" material="color: #e8f3f8; opacity: 0.92; transparent: true; roughness: 0.1"></a-sphere>
         <a-circle class="liq" radius="0.0442" rotation="-90 0 0" position="0 -0.0161 0" material="color: #e8f3f8; opacity: 0.92; transparent: true; roughness: 0.1"></a-circle>
