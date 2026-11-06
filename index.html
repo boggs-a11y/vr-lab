@@ -1,0 +1,68 @@
+# Bar Aurora: Absolut VR table topper
+
+A WebXR experience for a table-top activation. Guests scan a QR code on the table and either:
+
+- **Step inside** a luxe hotel bar on Lake Como (walnut, brass, marble, dusk over the water), or
+- **Place it on the table** as a miniature "dollhouse" bar, in AR on a phone or on screen.
+
+They then choose an Absolut (Original, Citron or Raspberri) and watch it poured. The panel above the bar shows the serve.
+
+Built with [A-Frame](https://aframe.io) 1.5. No build step and no binary assets: the room is primitives plus canvas-drawn textures.
+
+## Run it
+
+WebXR needs HTTPS or `localhost`.
+
+```bash
+git clone <your-repo-url>
+cd absolut-bar-aurora
+python3 -m http.server 8080      # or: npx serve
+# open http://localhost:8080
+```
+
+## Deploy (GitHub Pages)
+
+Settings → Pages → deploy from the `main` branch, root folder. Point the table QR code at the Pages URL.
+
+## Controls
+
+| Where | How |
+| --- | --- |
+| Desktop | Drag to look, WASD to move, click a bottle (or press 1, 2, 3) |
+| Phone | Drag to look, tap a bottle. "Place it on my table" enters AR where supported |
+| VR headset | "Enter VR" button, point and trigger on a bottle; point at the floor and trigger to move |
+
+## Project layout
+
+```
+index.html      scene markup, intro/age gate, HUD
+css/style.css   UI styling
+js/app.js       textures, bottle component, room builder, modes, interaction
+```
+
+Common edits in `js/app.js`:
+
+- `DRINKS`: names, serve copy, accent colours
+- `TABLETOP`: miniature scale and position
+- `build()`: furniture, shelves, windows
+
+Light levels are the `light` attributes in `index.html`. If the room looks too dark or bright on your device, change those intensities first.
+
+## Before this goes in front of guests
+
+- **Brand assets.** The bottle and label are placeholders drawn in code. Use official Absolut artwork, logo and typeface only with approval from the brand owner, then swap in glTF models or label textures.
+- **Age gate and responsible-drinking copy.** The checkbox gate and "enjoy responsibly" line are a starting point. Legal requirements differ by country and venue, so have legal and compliance review them.
+- **Hotel name.** "Hotel Belvedere" and "Bar Aurora" are fictional placeholders.
+
+## Known limits
+
+- Built without access to a headset or AR phone, so test on real devices. The AR placement (`ar-hit-test`, `rayOrigin: xrselect`) is the part most likely to need adjusting for your A-Frame version and browser.
+- Desktop and phone walk mode do not stop you walking through furniture. VR teleport is clamped.
+- WebXR AR works on Android Chrome. iOS Safari does not support WebXR, so iPhone guests get the on-screen miniature.
+
+## Ideas
+
+- Ambient audio (room tone, glass clink on pour)
+- Real glTF bottles and glassware
+- Table-specific QR codes with analytics
+- Seasonal serves per venue
