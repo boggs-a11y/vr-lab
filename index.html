@@ -15,50 +15,141 @@
 * { box-sizing: border-box; }
 html, body { margin:0; height:100%; background:var(--ink); color:var(--paper); font-family:"Jost", system-ui, sans-serif; }
 
-.intro { position:fixed; inset:0; z-index:10; display:flex; align-items:flex-end;
-  padding:clamp(16px,4vw,56px); padding-bottom:max(clamp(16px,4vw,56px), env(safe-area-inset-bottom));
-  background:linear-gradient(to top, rgba(12,8,6,.92), rgba(12,8,6,0) 70%); pointer-events:none; }
+.intro {
+  position:fixed;
+  inset:0;
+  z-index:10;
+  display:flex;
+  align-items:flex-end;
+  padding:clamp(16px,4vw,56px);
+  padding-bottom:max(clamp(16px,4vw,56px), env(safe-area-inset-bottom));
+  background:linear-gradient(to top, rgba(12,8,6,.92), rgba(12,8,6,0) 70%);
+  pointer-events:none;
+}
 .intro[hidden] { display:none; }
 .intro-card { max-width:30rem; pointer-events:auto; }
-.intro h1 { margin:0 0 .6rem; font-family:"Bodoni Moda", Georgia, serif; font-style:italic; font-weight:500;
-  font-size:clamp(3.2rem,11vw,6rem); line-height:.95; letter-spacing:-.01em; color:var(--brass); }
+.intro h1 {
+  margin:0 0 .6rem;
+  font-family:"Bodoni Moda", Georgia, serif;
+  font-style:italic;
+  font-weight:500;
+  font-size:clamp(3.2rem,11vw,6rem);
+  line-height:.95;
+  letter-spacing:-.01em;
+  color:var(--brass);
+}
 .lede { margin:0 0 1.4rem; font-size:1.125rem; line-height:1.5; max-width:34ch; }
 .age { display:flex; align-items:center; gap:.6rem; margin-bottom:1rem; cursor:pointer; }
 .age input { width:1.15rem; height:1.15rem; accent-color:var(--absolut); }
 .actions { display:flex; flex-wrap:wrap; gap:.75rem; }
-button { font:inherit; font-weight:500; padding:.85rem 1.4rem; border-radius:2px; border:1px solid var(--absolut);
-  background:var(--absolut); color:#fff; cursor:pointer; touch-action:manipulation; }
+button {
+  font:inherit;
+  font-weight:500;
+  padding:.85rem 1.4rem;
+  border-radius:2px;
+  border:1px solid var(--absolut);
+  background:var(--absolut);
+  color:#fff;
+  cursor:pointer;
+  touch-action:manipulation;
+}
 button.ghost { background:transparent; border-color:var(--brass); color:var(--paper); }
 button:disabled { opacity:.4; cursor:not-allowed; }
 button:focus-visible, .age input:focus-visible { outline:2px solid var(--brass); outline-offset:3px; }
 
-.hud { position:fixed; left:max(16px, env(safe-area-inset-left)); bottom:max(16px, env(safe-area-inset-bottom));
-  z-index:9; display:flex; flex-wrap:wrap; align-items:center; gap:8px; max-width:calc(100% - 140px); }
+.hud {
+  position:fixed;
+  left:max(16px, env(safe-area-inset-left));
+  bottom:max(16px, env(safe-area-inset-bottom));
+  z-index:9;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px;
+  max-width:calc(100% - 140px);
+}
 .hud[hidden], .turn[hidden] { display:none; }
 .turn { display:inline-flex; gap:8px; }
-.hud-btn { padding:.5rem .9rem; font-size:.9rem; background:rgba(12,8,6,.7); border:1px solid var(--brass); color:var(--paper); }
+.hud-btn {
+  padding:.5rem .9rem;
+  font-size:.9rem;
+  background:rgba(12,8,6,.7);
+  border:1px solid var(--brass);
+  color:var(--paper);
+}
 .hud-btn[aria-pressed="true"] { background:var(--brass); color:var(--ink); }
 .hint { flex-basis:100%; margin:4px 0 0; font-size:.9rem; text-shadow:0 1px 6px rgba(0,0,0,.9); }
 
-body.film::before, body.film::after { content:""; position:fixed; left:0; right:0; height:11vh; background:#000; z-index:8; }
+body.film::before, body.film::after {
+  content:"";
+  position:fixed;
+  left:0;
+  right:0;
+  height:11vh;
+  background:#000;
+  z-index:8;
+}
 body.film::before { top:0; }
 body.film::after { bottom:0; }
-.cap { position:fixed; left:0; right:0; bottom:15vh; z-index:9; padding:0 1rem; text-align:center; pointer-events:none;
-  font-family:"Bodoni Moda", Georgia, serif; font-style:italic; font-size:clamp(1.6rem,4.5vw,3rem); color:var(--paper);
-  text-shadow:0 2px 20px rgba(0,0,0,.8); opacity:0; transition:opacity .8s; }
+
+.cap {
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:15vh;
+  z-index:9;
+  padding:0 1rem;
+  text-align:center;
+  pointer-events:none;
+  font-family:"Bodoni Moda", Georgia, serif;
+  font-style:italic;
+  font-size:clamp(1.6rem,4.5vw,3rem);
+  color:var(--paper);
+  text-shadow:0 2px 20px rgba(0,0,0,.8);
+  opacity:0;
+  transition:opacity .8s;
+}
 .cap.on { opacity:1; }
 .skip { position:fixed; right:16px; top:calc(11vh + 12px); z-index:9; }
 .skip[hidden], .end[hidden] { display:none; }
-.end { position:fixed; inset:0; z-index:10; padding:24px; display:flex; flex-direction:column; align-items:center;
-  justify-content:center; text-align:center; background:rgba(10,63,168,.93); animation:endfade 1s ease both; }
+
+.end {
+  position:fixed;
+  inset:0;
+  z-index:10;
+  padding:24px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:rgba(10,63,168,.93);
+  animation:endfade 1s ease both;
+}
 @keyframes endfade { from { opacity:0; } to { opacity:1; } }
-.wm { margin:0; font-weight:600; color:#fff; font-size:clamp(2.4rem,10vw,5.5rem); letter-spacing:.18em; padding-left:.18em; }
-.tag { margin:.4rem 0 1.8rem; color:#fff; opacity:.9; font-family:"Bodoni Moda", Georgia, serif; font-style:italic;
-  font-size:clamp(1.4rem,4vw,2.2rem); }
+.wm {
+  margin:0;
+  font-weight:600;
+  color:#fff;
+  font-size:clamp(2.4rem,10vw,5.5rem);
+  letter-spacing:.18em;
+  padding-left:.18em;
+}
+.tag {
+  margin:.4rem 0 1.8rem;
+  color:#fff;
+  opacity:.9;
+  font-family:"Bodoni Moda", Georgia, serif;
+  font-style:italic;
+  font-size:clamp(1.4rem,4vw,2.2rem);
+}
 .end .actions { justify-content:center; }
 .end button { background:#fff; color:var(--absolut); border-color:#fff; }
 .end button.ghost { background:transparent; color:#fff; }
-@media (prefers-reduced-motion: reduce) { * { transition:none !important; animation:none !important; } }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition:none !important; animation:none !important; }
+}
 </style>
 
 <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
@@ -73,33 +164,55 @@ body.film::after { bottom:0; }
   const TABLETOP = { scale: 0.06, position: [0, 1.15, -0.8] };
 
   const DRINKS = {
-    original: { name:'Absolut Original', short:'', serve:'The Milanese martini',
+    original: {
+      name:'Absolut Original',
+      short:'',
+      serve:'The Milanese martini',
       note:'Absolut, dry vermouth, a green olive. Stirred long and served very cold.',
-      accent:'#0a3fa8', liquid:'#e8f3f8', garnish:'#7a8b2f' },
-    citron: { name:'Absolut Citron', short:'CITRON', serve:'Lemon sour, Amalfi style',
+      accent:'#0a3fa8',
+      liquid:'#e8f3f8',
+      garnish:'#7a8b2f'
+    },
+    citron: {
+      name:'Absolut Citron',
+      short:'CITRON',
+      serve:'Lemon sour, Amalfi style',
       note:'Absolut Citron, limoncello, fresh lemon and a splash of soda over ice.',
-      accent:'#d9a900', liquid:'#f6e58a', garnish:'#f2d13a' },
-    raspberri: { name:'Absolut Raspberri', short:'RASPBERRI', serve:'Raspberri spritz',
+      accent:'#d9a900',
+      liquid:'#f6e58a',
+      garnish:'#f2d13a'
+    },
+    raspberri: {
+      name:'Absolut Raspberri',
+      short:'RASPBERRI',
+      serve:'Raspberri spritz',
       note:'Absolut Raspberri, chilled Prosecco and soda, with fresh raspberries.',
-      accent:'#c2185b', liquid:'#e888a8', garnish:'#b3123f' },
+      accent:'#c2185b',
+      liquid:'#e888a8',
+      garnish:'#b3123f'
+    },
   };
+
   const IDS = Object.keys(DRINKS);
   const state = { mode: 'walk', selected: null };
 
   function rng(seed) {
     return () => {
-      seed |= 0; seed = (seed + 0x6d2b79f5) | 0;
+      seed |= 0;
+      seed = (seed + 0x6d2b79f5) | 0;
       let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
       t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
       return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
     };
   }
+
   function add(parent, tag, attrs = {}) {
     const el = document.createElement(tag);
     for (const k in attrs) el.setAttribute(k, attrs[k]);
     parent.appendChild(el);
     return el;
   }
+
   const BRASS = 'color: #c8a25a; metalness: 0.9; roughness: 0.3';
 
   /* Procedural textures */
@@ -107,103 +220,188 @@ body.film::after { bottom:0; }
     marble(c, w, h) {
       const n = 8, s = w / n, r = rng(7);
       for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
-        c.fillStyle = (x + y) % 2 ? '#ece3cf' : '#1f3d33'; c.fillRect(x * s, y * s, s, s);
+        c.fillStyle = (x + y) % 2 ? '#ece3cf' : '#1f3d33';
+        c.fillRect(x * s, y * s, s, s);
       }
       for (let i = 0; i < 110; i++) {
         c.strokeStyle = r() > 0.5 ? 'rgba(255,255,255,.14)' : 'rgba(0,0,0,.12)';
         c.lineWidth = 0.6 + r() * 1.4;
         let x = r() * w, y = r() * h;
-        c.beginPath(); c.moveTo(x, y);
-        for (let k = 0; k < 7; k++) { x += (r() - 0.4) * 60; y += (r() - 0.5) * 60; c.lineTo(x, y); }
+        c.beginPath();
+        c.moveTo(x, y);
+        for (let k = 0; k < 7; k++) {
+          x += (r() - 0.4) * 60;
+          y += (r() - 0.5) * 60;
+          c.lineTo(x, y);
+        }
         c.stroke();
       }
-      c.strokeStyle = '#b8924a'; c.lineWidth = 3;
+      c.strokeStyle = '#b8924a';
+      c.lineWidth = 3;
       for (let i = 0; i <= n; i++) {
-        c.beginPath(); c.moveTo(i * s, 0); c.lineTo(i * s, h); c.stroke();
-        c.beginPath(); c.moveTo(0, i * s); c.lineTo(w, i * s); c.stroke();
+        c.beginPath();
+        c.moveTo(i * s, 0);
+        c.lineTo(i * s, h);
+        c.stroke();
+        c.beginPath();
+        c.moveTo(0, i * s);
+        c.lineTo(w, i * s);
+        c.stroke();
       }
     },
+
     slab(c, w, h) {
       const r = rng(5);
-      c.fillStyle = '#f1ede4'; c.fillRect(0, 0, w, h);
+      c.fillStyle = '#f1ede4';
+      c.fillRect(0, 0, w, h);
       for (let i = 0; i < 50; i++) {
-        c.strokeStyle = `rgba(70,75,85,${0.08 + r() * 0.18})`; c.lineWidth = 0.8 + r() * 2;
+        c.strokeStyle = `rgba(70,75,85,${0.08 + r() * 0.18})`;
+        c.lineWidth = 0.8 + r() * 2;
         let x = r() * w, y = r() * h;
-        c.beginPath(); c.moveTo(x, y);
-        for (let k = 0; k < 6; k++) { x += (r() - 0.3) * 120; y += (r() - 0.5) * 70; c.lineTo(x, y); }
+        c.beginPath();
+        c.moveTo(x, y);
+        for (let k = 0; k < 6; k++) {
+          x += (r() - 0.3) * 120;
+          y += (r() - 0.5) * 70;
+          c.lineTo(x, y);
+        }
         c.stroke();
       }
     },
+
     wood(c, w, h) {
       const r = rng(11);
-      c.fillStyle = '#3a2315'; c.fillRect(0, 0, w, h);
+      c.fillStyle = '#3a2315';
+      c.fillRect(0, 0, w, h);
       for (let x = 0; x < w; x += w / 8) {
         c.fillStyle = `rgba(${r() > 0.5 ? '255,200,140' : '0,0,0'},${0.05 + r() * 0.08})`;
         c.fillRect(x, 0, w / 8, h);
       }
       for (let i = 0; i < 260; i++) {
-        c.strokeStyle = `rgba(${r() > 0.5 ? '20,10,5' : '160,100,60'},${0.05 + r() * 0.12})`; c.lineWidth = 1;
+        c.strokeStyle = `rgba(${r() > 0.5 ? '20,10,5' : '160,100,60'},${0.05 + r() * 0.12})`;
+        c.lineWidth = 1;
         const x = r() * w;
-        c.beginPath(); c.moveTo(x, 0);
-        c.bezierCurveTo(x + r() * 10 - 5, h * 0.3, x + r() * 10 - 5, h * 0.6, x + r() * 8 - 4, h);
+        c.beginPath();
+        c.moveTo(x, 0);
+        c.bezierCurveTo(
+          x + r() * 10 - 5, h * 0.3,
+          x + r() * 10 - 5, h * 0.6,
+          x + r() * 8 - 4, h
+        );
         c.stroke();
       }
-      c.strokeStyle = '#c8a25a'; c.lineWidth = 2;
-      for (let x = 0; x <= w; x += w / 8) { c.beginPath(); c.moveTo(x, 0); c.lineTo(x, h); c.stroke(); }
+      c.strokeStyle = '#c8a25a';
+      c.lineWidth = 2;
+      for (let x = 0; x <= w; x += w / 8) {
+        c.beginPath();
+        c.moveTo(x, 0);
+        c.lineTo(x, h);
+        c.stroke();
+      }
     },
+
     sky(c, w, h) {
       const r = rng(3);
       let g = c.createLinearGradient(0, 0, 0, h * 0.72);
-      g.addColorStop(0, '#16224d'); g.addColorStop(0.5, '#6d4f86');
-      g.addColorStop(0.85, '#f0a15e'); g.addColorStop(1, '#f8d38e');
-      c.fillStyle = g; c.fillRect(0, 0, w, h);
+      g.addColorStop(0, '#16224d');
+      g.addColorStop(0.5, '#6d4f86');
+      g.addColorStop(0.85, '#f0a15e');
+      g.addColorStop(1, '#f8d38e');
+      c.fillStyle = g;
+      c.fillRect(0, 0, w, h);
+
       c.fillStyle = 'rgba(255,255,255,.7)';
       for (let i = 0; i < 30; i++) c.fillRect(r() * w, r() * h * 0.35, 1.5, 1.5);
+
       const ridge = (base, amp, col, seed) => {
         const q = rng(seed);
-        c.fillStyle = col; c.beginPath(); c.moveTo(0, h); c.lineTo(0, base);
-        for (let x = 0; x <= w; x += 16) c.lineTo(x, base - amp * (0.5 + 0.5 * Math.sin(x * 0.013 + seed)) - q() * amp * 0.35);
-        c.lineTo(w, h); c.closePath(); c.fill();
+        c.fillStyle = col;
+        c.beginPath();
+        c.moveTo(0, h);
+        c.lineTo(0, base);
+        for (let x = 0; x <= w; x += 16) {
+          c.lineTo(x, base - amp * (0.5 + 0.5 * Math.sin(x * 0.013 + seed)) - q() * amp * 0.35);
+        }
+        c.lineTo(w, h);
+        c.closePath();
+        c.fill();
       };
+
       ridge(h * 0.66, 70, '#4a4a7a', 1);
       ridge(h * 0.7, 55, '#2d3158', 5);
+
       g = c.createLinearGradient(0, h * 0.72, 0, h);
-      g.addColorStop(0, '#f0a76a'); g.addColorStop(0.35, '#7a5a86'); g.addColorStop(1, '#141c3d');
-      c.fillStyle = g; c.fillRect(0, h * 0.72, w, h * 0.28);
+      g.addColorStop(0, '#f0a76a');
+      g.addColorStop(0.35, '#7a5a86');
+      g.addColorStop(1, '#141c3d');
+      c.fillStyle = g;
+      c.fillRect(0, h * 0.72, w, h * 0.28);
+
       c.fillStyle = 'rgba(255,214,150,.35)';
-      for (let i = 0; i < 40; i++) c.fillRect(r() * w, h * 0.73 + r() * h * 0.25, 20 + r() * 60, 2);
-      for (let i = 0; i < 9; i++) {
-        const x = 20 + i * 54 + r() * 20, y = h * 0.7 + r() * 6, bw = 34 + r() * 18, bh = 22 + r() * 10;
-        c.fillStyle = ['#d98b5f', '#e8b27c', '#c4694a'][i % 3]; c.fillRect(x, y - bh, bw, bh);
-        c.fillStyle = '#7a3b2c'; c.beginPath();
-        c.moveTo(x - 3, y - bh); c.lineTo(x + bw / 2, y - bh - 10); c.lineTo(x + bw + 3, y - bh); c.fill();
-        c.fillStyle = '#ffd27a';
-        for (let k = 0; k < 3; k++) c.fillRect(x + 6 + k * (bw / 3.2), y - bh + 8, 5, 7);
+      for (let i = 0; i < 40; i++) {
+        c.fillRect(r() * w, h * 0.73 + r() * h * 0.25, 20 + r() * 60, 2);
       }
+
+      for (let i = 0; i < 9; i++) {
+        const x = 20 + i * 54 + r() * 20;
+        const y = h * 0.7 + r() * 6;
+        const bw = 34 + r() * 18;
+        const bh = 22 + r() * 10;
+        c.fillStyle = ['#d98b5f', '#e8b27c', '#c4694a'][i % 3];
+        c.fillRect(x, y - bh, bw, bh);
+        c.fillStyle = '#7a3b2c';
+        c.beginPath();
+        c.moveTo(x - 3, y - bh);
+        c.lineTo(x + bw / 2, y - bh - 10);
+        c.lineTo(x + bw + 3, y - bh);
+        c.fill();
+        c.fillStyle = '#ffd27a';
+        for (let k = 0; k < 3; k++) {
+          c.fillRect(x + 6 + k * (bw / 3.2), y - bh + 8, 5, 7);
+        }
+      }
+
       c.fillStyle = '#0f1d1a';
-      for (let i = 0; i < 5; i++) { c.beginPath(); c.ellipse(40 + i * 110 + r() * 30, h * 0.72, 9, 48, 0, 0, Math.PI * 2); c.fill(); }
+      for (let i = 0; i < 5; i++) {
+        c.beginPath();
+        c.ellipse(40 + i * 110 + r() * 30, h * 0.72, 9, 48, 0, 0, Math.PI * 2);
+        c.fill();
+      }
     },
+
     label(c, w, h, d) {
       const F = '"Helvetica Neue", Helvetica, Arial, sans-serif';
-      c.clearRect(0, 0, w, h); c.fillStyle = d.accent; c.textAlign = 'center';
-      c.font = '700 112px ' + F; if ('letterSpacing' in c) c.letterSpacing = '10px';
+      c.clearRect(0, 0, w, h);
+      c.fillStyle = d.accent;
+      c.textAlign = 'center';
+      c.font = '700 112px ' + F;
+      if ('letterSpacing' in c) c.letterSpacing = '10px';
       c.fillText('ABSOLUT', w / 2, h * 0.4);
-      c.font = '500 44px ' + F; if ('letterSpacing' in c) c.letterSpacing = '14px';
+      c.font = '500 44px ' + F;
+      if ('letterSpacing' in c) c.letterSpacing = '14px';
       c.fillText('VODKA', w / 2, h * 0.55);
-      if (d.short) { c.font = '600 54px ' + F; c.fillText(d.short, w / 2, h * 0.72); }
+      if (d.short) {
+        c.font = '600 54px ' + F;
+        c.fillText(d.short, w / 2, h * 0.72);
+      }
       c.fillRect(w * 0.18, h * 0.8, w * 0.64, 3);
-      c.font = '500 24px ' + F; if ('letterSpacing' in c) c.letterSpacing = '6px';
+      c.font = '500 24px ' + F;
+      if ('letterSpacing' in c) c.letterSpacing = '6px';
       c.fillText('COUNTRY OF SWEDEN', w / 2, h * 0.9);
     },
   };
 
   const texCache = new Map();
+
   function getTexture(d) {
     const key = JSON.stringify([d.kind, d.repeat, d.drink, d.size]);
     if (texCache.has(key)) return texCache.get(key);
+
     const cv = document.createElement('canvas');
-    cv.width = d.size.x; cv.height = d.size.y;
+    cv.width = d.size.x;
+    cv.height = d.size.y;
     painters[d.kind](cv.getContext('2d'), cv.width, cv.height, DRINKS[d.drink]);
+
     const t = new THREE.CanvasTexture(cv);
     if (THREE.SRGBColorSpace) t.colorSpace = THREE.SRGBColorSpace;
     t.wrapS = t.wrapT = THREE.RepeatWrapping;
@@ -238,19 +436,34 @@ body.film::after { bottom:0; }
       const glass = 'color: #cfe6ee; opacity: 0.28; transparent: true; roughness: 0.05; metalness: 0.1; depthWrite: false';
       const spirit = `color: ${d.liquid}; opacity: 0.9; transparent: true; roughness: 0.1`;
       const hit = { class: 'clickable' };
+
       add(el, 'a-cylinder', { ...hit, radius: 0.042, height: 0.14, position: '0 0.07 0', material: glass });
       add(el, 'a-cylinder', { ...hit, radius: 0.039, height: 0.13, position: '0 0.068 0', material: spirit });
       add(el, 'a-cylinder', { ...hit, 'radius-bottom': 0.042, 'radius-top': 0.017, height: 0.05, position: '0 0.165 0', material: glass });
       add(el, 'a-cylinder', { ...hit, 'radius-bottom': 0.039, 'radius-top': 0.015, height: 0.045, position: '0 0.1625 0', material: spirit });
       add(el, 'a-cylinder', { ...hit, radius: 0.017, height: 0.05, position: '0 0.215 0', material: glass });
       add(el, 'a-cylinder', { ...hit, radius: 0.019, height: 0.022, position: '0 0.25 0', material: 'color: #c9ced6; metalness: 0.9; roughness: 0.25' });
+
       add(el, 'a-cylinder', {
-        ...hit, 'open-ended': true, radius: 0.0432, height: 0.085, position: '0 0.078 0',
-        'theta-start': -90, 'theta-length': 180,
+        ...hit,
+        'open-ended': true,
+        radius: 0.0432,
+        height: 0.085,
+        position: '0 0.078 0',
+        'theta-start': -90,
+        'theta-length': 180,
         material: 'shader: flat; transparent: true; side: double; depthWrite: false',
         'gen-texture': `kind: label; drink: ${id}; size: 640 400`,
       });
-      add(el, 'a-box', { ...hit, width: 0.1, height: 0.27, depth: 0.1, position: '0 0.135 0', material: 'opacity: 0; transparent: true; depthWrite: false' });
+
+      add(el, 'a-box', {
+        ...hit,
+        width: 0.1,
+        height: 0.27,
+        depth: 0.1,
+        position: '0 0.135 0',
+        material: 'opacity: 0; transparent: true; depthWrite: false'
+      });
     },
   });
 
@@ -269,40 +482,61 @@ body.film::after { bottom:0; }
         if (state.mode !== 'walk' || !scene.is('vr-mode') || !e.detail.intersection) return;
         const p = e.detail.intersection.point;
         $('#rig').object3D.position.set(
-          THREE.MathUtils.clamp(p.x, -3.2, 3.2), 0, THREE.MathUtils.clamp(p.z, 0.1, 3));
+          THREE.MathUtils.clamp(p.x, -3.2, 3.2),
+          0,
+          THREE.MathUtils.clamp(p.z, 0.1, 3)
+        );
       });
     },
   });
 
   /* Choosing a bottle */
-  function hint(text) { const h = $('#hint'); if (h) h.textContent = text; }
+  function hint(text) {
+    const h = $('#hint');
+    if (h) h.textContent = text;
+  }
 
   function select(id) {
     const d = DRINKS[id];
     if (!d) return;
     state.selected = id;
+
     IDS.forEach((k) => {
       const on = k === id;
       const bottle = $('#bottle-' + k), tray = $('#tray-' + k), p = bottle.object3D.position;
+
       bottle.setAttribute('animation__lift', {
-        property: 'position', to: `${p.x} ${TOP_Y + 0.012 + (on ? 0.09 : 0)} ${p.z}`,
-        dur: dur(500), easing: 'easeOutCubic',
+        property: 'position',
+        to: `${p.x} ${TOP_Y + 0.012 + (on ? 0.09 : 0)} ${p.z}`,
+        dur: dur(500),
+        easing: 'easeOutCubic',
       });
+
       tray.setAttribute('material', 'emissive', on ? DRINKS[k].accent : '#000000');
       tray.setAttribute('material', 'emissiveIntensity', on ? 0.9 : 0);
     });
+
     const liquid = $('#liquid');
     liquid.querySelectorAll('.liq').forEach((e) => e.setAttribute('material', 'color', d.liquid));
     liquid.setAttribute('visible', true);
     liquid.removeAttribute('animation__fill');
-    liquid.setAttribute('animation__fill', { property: 'scale', from: '0.3 0.3 0.3', to: '1 1 1', dur: dur(900), easing: 'easeOutQuad' });
+    liquid.setAttribute('animation__fill', {
+      property: 'scale',
+      from: '0.3 0.3 0.3',
+      to: '1 1 1',
+      dur: dur(900),
+      easing: 'easeOutQuad'
+    });
+
     const garnish = $('#garnish');
     garnish.setAttribute('material', 'color', d.garnish);
     garnish.setAttribute('visible', true);
+
     $('#p-name').setAttribute('value', d.name);
     $('#p-serve').setAttribute('value', d.serve);
     $('#p-note').setAttribute('value', d.note);
     $('#p-accent').setAttribute('material', 'color', d.accent);
+
     hint(`${d.name} is poured. Choose another bottle to change your drink.`);
   }
 
@@ -311,86 +545,312 @@ body.film::after { bottom:0; }
     const world = $('#world');
 
     for (let i = 0; i < 35; i++) {
-      add(world, 'a-cylinder', { position: `${-2.55 + i * 0.15} 0.5 -1.23`, radius: 0.034, height: 0.95, material: 'color: #4a2d1c; roughness: 0.55' });
+      add(world, 'a-cylinder', {
+        position: `${-2.55 + i * 0.15} 0.5 -1.23`,
+        radius: 0.034,
+        height: 0.95,
+        material: 'color: #4a2d1c; roughness: 0.55'
+      });
     }
-    [-2.4, 0, 2.4].forEach((x) => add(world, 'a-cylinder', { position: `${x} 0.1 -1.0`, radius: 0.012, height: 0.2, material: BRASS }));
+
+    [-2.4, 0, 2.4].forEach((x) => add(world, 'a-cylinder', {
+      position: `${x} 0.1 -1.0`,
+      radius: 0.012,
+      height: 0.2,
+      material: BRASS
+    }));
 
     const r = rng(21);
     const cols = ['#7a4a1a', '#1f4d2b', '#d9e6ea', '#5b1220', '#b8832f', '#9bb7c4'];
+
     [1.47, 1.87, 2.27].forEach((y) => {
-      add(world, 'a-box', { position: `0 ${y} -3.32`, width: 5.2, height: 0.03, depth: 0.3, material: BRASS });
-      add(world, 'a-box', { position: `0 ${y - 0.03} -3.2`, width: 5.1, height: 0.015, depth: 0.02, material: 'color: #ffcf8a; emissive: #ffb347; emissiveIntensity: 1.2' });
+      add(world, 'a-box', {
+        position: `0 ${y} -3.32`,
+        width: 5.2,
+        height: 0.03,
+        depth: 0.3,
+        material: BRASS
+      });
+
+      add(world, 'a-box', {
+        position: `0 ${y - 0.03} -3.2`,
+        width: 5.1,
+        height: 0.015,
+        depth: 0.02,
+        material: 'color: #ffcf8a; emissive: #ffb347; emissiveIntensity: 1.2'
+      });
+
       for (let i = 0; i < 15; i++) {
-        const x = -2.45 + i * 0.35 + (r() - 0.5) * 0.05, h = 0.2 + r() * 0.12, c = cols[Math.floor(r() * cols.length)];
-        add(world, 'a-cylinder', { position: `${x} ${y + 0.015 + h / 2} -3.32`, radius: 0.05, height: h, material: `color: ${c}; roughness: 0.15; metalness: 0.2; opacity: 0.9; transparent: true` });
-        add(world, 'a-cylinder', { position: `${x} ${y + 0.015 + h + 0.04} -3.32`, radius: 0.015, height: 0.08, material: `color: ${c}; roughness: 0.15; opacity: 0.9; transparent: true` });
+        const x = -2.45 + i * 0.35 + (r() - 0.5) * 0.05;
+        const h = 0.2 + r() * 0.12;
+        const c = cols[Math.floor(r() * cols.length)];
+
+        add(world, 'a-cylinder', {
+          position: `${x} ${y + 0.015 + h / 2} -3.32`,
+          radius: 0.05,
+          height: h,
+          material: `color: ${c}; roughness: 0.15; metalness: 0.2; opacity: 0.9; transparent: true`
+        });
+
+        add(world, 'a-cylinder', {
+          position: `${x} ${y + 0.015 + h + 0.04} -3.32`,
+          radius: 0.015,
+          height: 0.08,
+          material: `color: ${c}; roughness: 0.15; opacity: 0.9; transparent: true`
+        });
       }
     });
 
     const xs = [-0.55, 0, 0.55];
+
     IDS.forEach((id, i) => {
-      add(world, 'a-cylinder', { id: 'tray-' + id, position: `${xs[i]} ${TOP_Y + 0.006} -1.75`, radius: 0.085, height: 0.012, material: `${BRASS}; emissive: #000000` });
+      add(world, 'a-cylinder', {
+        id: 'tray-' + id,
+        position: `${xs[i]} ${TOP_Y + 0.006} -1.75`,
+        radius: 0.085,
+        height: 0.012,
+        material: `${BRASS}; emissive: #000000`
+      });
+
       add(world, 'a-entity', {
-        id: 'bottle-' + id, position: `${xs[i]} ${TOP_Y + 0.012} -1.75`, scale: '1.5 1.5 1.5',
-        'absolut-bottle': `drink: ${id}`, pick: '', 'data-drink': id,
+        id: 'bottle-' + id,
+        position: `${xs[i]} ${TOP_Y + 0.012} -1.75`,
+        scale: '1.5 1.5 1.5',
+        'absolut-bottle': `drink: ${id}`,
+        pick: '',
+        'data-drink': id,
       });
     });
 
     for (let i = 0; i < 6; i++) {
       const x = -2.2 + i * 0.88;
-      add(world, 'a-cylinder', { position: `${x} 0.01 -0.75`, radius: 0.17, height: 0.02, material: BRASS });
-      add(world, 'a-cylinder', { position: `${x} 0.32 -0.75`, radius: 0.02, height: 0.62, material: BRASS });
-      add(world, 'a-cylinder', { position: `${x} 0.69 -0.75`, radius: 0.2, height: 0.1, material: 'color: #6b1d2a; roughness: 0.9' });
+      add(world, 'a-cylinder', {
+        position: `${x} 0.01 -0.75`,
+        radius: 0.17,
+        height: 0.02,
+        material: BRASS
+      });
+      add(world, 'a-cylinder', {
+        position: `${x} 0.32 -0.75`,
+        radius: 0.02,
+        height: 0.62,
+        material: BRASS
+      });
+      add(world, 'a-cylinder', {
+        position: `${x} 0.69 -0.75`,
+        radius: 0.2,
+        height: 0.1,
+        material: 'color: #6b1d2a; roughness: 0.9'
+      });
     }
 
     [[2.7, 1.3], [2.7, -0.1]].forEach(([x, z]) => {
-      add(world, 'a-cylinder', { position: `${x} 0.27 ${z}`, radius: 0.04, height: 0.54, material: BRASS });
-      add(world, 'a-cylinder', { position: `${x} 0.02 ${z}`, radius: 0.2, height: 0.03, material: BRASS });
-      add(world, 'a-cylinder', { position: `${x} 0.56 ${z}`, radius: 0.38, height: 0.04, material: 'color: #f1ede4; roughness: 0.2', 'gen-texture': 'kind: slab; size: 256 256' });
-      add(world, 'a-cylinder', { position: `${x} 0.62 ${z}`, radius: 0.03, height: 0.08, material: 'color: #ffe9c4; emissive: #ffb85a; emissiveIntensity: 0.6' });
-      add(world, 'a-sphere', { position: `${x} 0.68 ${z}`, radius: 0.012, material: 'color: #ffcf6a; emissive: #ffb347; emissiveIntensity: 2; shader: flat' });
+      add(world, 'a-cylinder', {
+        position: `${x} 0.27 ${z}`,
+        radius: 0.04,
+        height: 0.54,
+        material: BRASS
+      });
+      add(world, 'a-cylinder', {
+        position: `${x} 0.02 ${z}`,
+        radius: 0.2,
+        height: 0.03,
+        material: BRASS
+      });
+      add(world, 'a-cylinder', {
+        position: `${x} 0.56 ${z}`,
+        radius: 0.38,
+        height: 0.04,
+        material: 'color: #f1ede4; roughness: 0.2',
+        'gen-texture': 'kind: slab; size: 256 256'
+      });
+      add(world, 'a-cylinder', {
+        position: `${x} 0.62 ${z}`,
+        radius: 0.03,
+        height: 0.08,
+        material: 'color: #ffe9c4; emissive: #ffb85a; emissiveIntensity: 0.6'
+      });
+      add(world, 'a-sphere', {
+        position: `${x} 0.68 ${z}`,
+        radius: 0.012,
+        material: 'color: #ffcf6a; emissive: #ffb347; emissiveIntensity: 2; shader: flat'
+      });
+
       [[-0.65, 90], [0.65, -90]].forEach(([dx, ry]) => {
-        const g = add(world, 'a-entity', { position: `${x + dx} 0 ${z}`, rotation: `0 ${ry} 0` });
-        add(g, 'a-box', { position: '0 0.3 0', width: 0.55, height: 0.2, depth: 0.55, material: 'color: #6b1d2a; roughness: 0.9' });
-        add(g, 'a-box', { position: '0 0.55 -0.24', width: 0.55, height: 0.4, depth: 0.1, material: 'color: #6b1d2a; roughness: 0.9' });
+        const g = add(world, 'a-entity', {
+          position: `${x + dx} 0 ${z}`,
+          rotation: `0 ${ry} 0`
+        });
+
+        add(g, 'a-box', {
+          position: '0 0.3 0',
+          width: 0.55,
+          height: 0.2,
+          depth: 0.55,
+          material: 'color: #6b1d2a; roughness: 0.9'
+        });
+
+        add(g, 'a-box', {
+          position: '0 0.55 -0.24',
+          width: 0.55,
+          height: 0.4,
+          depth: 0.1,
+          material: 'color: #6b1d2a; roughness: 0.9'
+        });
+
         [[-0.22, -0.22], [0.22, -0.22], [-0.22, 0.22], [0.22, 0.22]].forEach(([lx, lz]) =>
-          add(g, 'a-cylinder', { position: `${lx} 0.1 ${lz}`, radius: 0.02, height: 0.2, material: BRASS }));
+          add(g, 'a-cylinder', {
+            position: `${lx} 0.1 ${lz}`,
+            radius: 0.02,
+            height: 0.2,
+            material: BRASS
+          })
+        );
       });
     });
 
     [-1.6, 0, 1.6].forEach((x) => {
-      add(world, 'a-cylinder', { position: `${x} 3.0 -1.6`, radius: 0.005, height: 0.8, material: BRASS });
-      add(world, 'a-cone', { position: `${x} 2.55 -1.6`, 'radius-bottom': 0.22, 'radius-top': 0.06, height: 0.22, 'open-ended': true, material: `${BRASS}; side: double` });
-      add(world, 'a-sphere', { position: `${x} 2.48 -1.6`, radius: 0.06, material: 'color: #ffe3b0; emissive: #ffc27a; emissiveIntensity: 2; shader: flat' });
-      add(world, 'a-entity', { position: `${x} 2.4 -1.6`, light: 'type: point; color: #ffc27a; intensity: 0.8; decay: 0; distance: 0' });
+      add(world, 'a-cylinder', {
+        position: `${x} 3.0 -1.6`,
+        radius: 0.005,
+        height: 0.8,
+        material: BRASS
+      });
+      add(world, 'a-cone', {
+        position: `${x} 2.55 -1.6`,
+        'radius-bottom': 0.22,
+        'radius-top': 0.06,
+        height: 0.22,
+        'open-ended': true,
+        material: `${BRASS}; side: double`
+      });
+      add(world, 'a-sphere', {
+        position: `${x} 2.48 -1.6`,
+        radius: 0.06,
+        material: 'color: #ffe3b0; emissive: #ffc27a; emissiveIntensity: 2; shader: flat'
+      });
+      add(world, 'a-entity', {
+        position: `${x} 2.4 -1.6`,
+        light: 'type: point; color: #ffc27a; intensity: 0.8; decay: 0; distance: 0'
+      });
     });
 
     [-2, 0, 2].forEach((z) => {
-      const win = add(world, 'a-entity', { position: `-3.97 1.55 ${z}`, rotation: '0 90 0' });
-      add(win, 'a-plane', { width: 1.3, height: 2.3, material: 'shader: flat', 'gen-texture': 'kind: sky; size: 512 900' });
-      [1.17, -1.17].forEach((py) => add(win, 'a-box', { position: `0 ${py} 0.02`, width: 1.38, height: 0.06, depth: 0.05, material: BRASS }));
-      [-0.67, 0.67].forEach((px) => add(win, 'a-box', { position: `${px} 0 0.02`, width: 0.06, height: 2.4, depth: 0.05, material: BRASS }));
-      add(win, 'a-box', { position: '0 0 0.02', width: 0.03, height: 2.3, depth: 0.04, material: BRASS });
-      add(win, 'a-box', { position: '0 0.35 0.02', width: 1.3, height: 0.03, depth: 0.04, material: BRASS });
-      [-0.95, 0.95].forEach((px) => add(win, 'a-box', { position: `${px} 0.15 0.12`, width: 0.4, height: 2.7, depth: 0.14, material: 'color: #6b1d2a; roughness: 1' }));
+      const win = add(world, 'a-entity', {
+        position: `-3.97 1.55 ${z}`,
+        rotation: '0 90 0'
+      });
+
+      add(win, 'a-plane', {
+        width: 1.3,
+        height: 2.3,
+        material: 'shader: flat',
+        'gen-texture': 'kind: sky; size: 512 900'
+      });
+
+      [1.17, -1.17].forEach((py) => add(win, 'a-box', {
+        position: `0 ${py} 0.02`,
+        width: 1.38,
+        height: 0.06,
+        depth: 0.05,
+        material: BRASS
+      }));
+
+      [-0.67, 0.67].forEach((px) => add(win, 'a-box', {
+        position: `${px} 0 0.02`,
+        width: 0.06,
+        height: 2.4,
+        depth: 0.05,
+        material: BRASS
+      }));
+
+      add(win, 'a-box', {
+        position: '0 0 0.02',
+        width: 0.03,
+        height: 2.3,
+        depth: 0.04,
+        material: BRASS
+      });
+
+      add(win, 'a-box', {
+        position: '0 0.35 0.02',
+        width: 1.3,
+        height: 0.03,
+        depth: 0.04,
+        material: BRASS
+      });
+
+      [-0.95, 0.95].forEach((px) => add(win, 'a-box', {
+        position: `${px} 0.15 0.12`,
+        width: 0.4,
+        height: 2.7,
+        depth: 0.14,
+        material: 'color: #6b1d2a; roughness: 1'
+      }));
     });
 
     [[-2, '#0a3fa8', '#f4ead7'], [0, '#b5502f', '#e8b27c'], [2, '#c8962c', '#1f3d33']].forEach(([z, a, b]) => {
-      const art = add(world, 'a-entity', { position: `3.97 1.9 ${z}`, rotation: '0 -90 0' });
-      add(art, 'a-box', { width: 1.0, height: 1.3, depth: 0.05, material: BRASS });
-      add(art, 'a-plane', { width: 0.88, height: 1.18, position: '0 0 0.03', material: `color: ${a}; shader: flat` });
-      add(art, 'a-plane', { width: 0.4, height: 0.5, position: '0.12 -0.1 0.035', material: `color: ${b}; shader: flat` });
-      add(art, 'a-plane', { width: 0.18, height: 0.18, position: '-0.2 0.3 0.04', material: `color: ${b}; shader: flat; opacity: 0.85; transparent: true` });
+      const art = add(world, 'a-entity', {
+        position: `3.97 1.9 ${z}`,
+        rotation: '0 -90 0'
+      });
+
+      add(art, 'a-box', {
+        width: 1.0,
+        height: 1.3,
+        depth: 0.05,
+        material: BRASS
+      });
+
+      add(art, 'a-plane', {
+        width: 0.88,
+        height: 1.18,
+        position: '0 0 0.03',
+        material: `color: ${a}; shader: flat`
+      });
+
+      add(art, 'a-plane', {
+        width: 0.4,
+        height: 0.5,
+        position: '0.12 -0.1 0.035',
+        material: `color: ${b}; shader: flat`
+      });
+
+      add(art, 'a-plane', {
+        width: 0.18,
+        height: 0.18,
+        position: '-0.2 0.3 0.04',
+        material: `color: ${b}; shader: flat; opacity: 0.85; transparent: true`
+      });
     });
 
     const tree = add(world, 'a-entity', { position: '-3.3 0 2.7' });
-    add(tree, 'a-cylinder', { position: '0 0.25 0', radius: 0.28, height: 0.5, material: 'color: #b5502f; roughness: 0.9' });
-    add(tree, 'a-cylinder', { position: '0 0.8 0', radius: 0.04, height: 0.7, material: 'color: #4a2d1c' });
-    add(tree, 'a-sphere', { position: '0 1.4 0', radius: 0.55, material: 'color: #2f6b3a; roughness: 1' });
+    add(tree, 'a-cylinder', {
+      position: '0 0.25 0',
+      radius: 0.28,
+      height: 0.5,
+      material: 'color: #b5502f; roughness: 0.9'
+    });
+    add(tree, 'a-cylinder', {
+      position: '0 0.8 0',
+      radius: 0.04,
+      height: 0.7,
+      material: 'color: #4a2d1c'
+    });
+    add(tree, 'a-sphere', {
+      position: '0 1.4 0',
+      radius: 0.55,
+      material: 'color: #2f6b3a; roughness: 1'
+    });
+
     const lr = rng(9);
     for (let i = 0; i < 9; i++) {
       const a = lr() * Math.PI * 2, hgt = 1.2 + lr() * 0.5;
-      add(tree, 'a-sphere', { position: `${Math.cos(a) * 0.5} ${hgt} ${Math.sin(a) * 0.5}`, radius: 0.06, material: 'color: #f2d13a; roughness: 0.6' });
+      add(tree, 'a-sphere', {
+        position: `${Math.cos(a) * 0.5} ${hgt} ${Math.sin(a) * 0.5}`,
+        radius: 0.06,
+        material: 'color: #f2d13a; roughness: 0.6'
+      });
     }
   }
 
@@ -399,12 +859,19 @@ body.film::after { bottom:0; }
     state.mode = mode;
     const world = $('#world').object3D, rig = $('#rig').object3D, cam = $('#cam');
     const lc = cam.components && cam.components['look-controls'];
+
     $('#ceiling').setAttribute('visible', mode === 'walk');
     $('#turn').hidden = mode !== 'tabletop';
     rig.rotation.set(0, 0, 0);
-    document.querySelectorAll('[data-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+
+    document.querySelectorAll('[data-mode]').forEach((b) =>
+      b.setAttribute('aria-pressed', String(b.dataset.mode === mode))
+    );
+
     if (mode === 'walk') {
-      world.scale.set(1, 1, 1); world.position.set(0, 0, 0); world.rotation.set(0, 0, 0);
+      world.scale.set(1, 1, 1);
+      world.position.set(0, 0, 0);
+      world.rotation.set(0, 0, 0);
       rig.position.set(0, 0, 1.2);
       if (lc) lc.pitchObject.rotation.x = 0;
       hint(state.selected ? $('#hint').textContent : 'Click a bottle on the bar to have it poured. Press 1, 2 or 3 as a shortcut.');
@@ -435,15 +902,18 @@ body.film::after { bottom:0; }
     [14, 0, -0.5, -0.55, 0, -7],
     [20, 0, -0.3, 0.6, 0, -2],
   ];
+
   const CAPS = [
     [0.6, 4.2, 'Evening at Bar Aurora.'],
     [5.2, 8.8, 'Some nights call for something clear.'],
     [10, 13.5, 'Choose Absolut.'],
   ];
+
   const POUR_AT = 9.6, END_CARD_AT = 15;
   let filmRun = 0;
 
   const ease = (u) => u * u * (3 - 2 * u);
+
   function pose(t) {
     let i = 0;
     while (i < KEYS.length - 2 && t > KEYS[i + 1][0]) i++;
@@ -451,14 +921,17 @@ body.film::after { bottom:0; }
     const u = ease(Math.min(1, Math.max(0, (t - a[0]) / (b[0] - a[0]))));
     return a.map((v, k) => v + (b[k] - v) * u);
   }
+
   function applyPose(p) {
     const rig = $('#rig').object3D;
     rig.position.set(p[1], p[2], p[3]);
     rig.rotation.set(0, (p[4] * Math.PI) / 180, 0);
     $('#cam').object3D.rotation.x = (p[5] * Math.PI) / 180;
   }
+
   function resetBar() {
     state.selected = null;
+
     IDS.forEach((k) => {
       const b = $('#bottle-' + k), tr = $('#tray-' + k);
       b.removeAttribute('animation__lift');
@@ -466,6 +939,7 @@ body.film::after { bottom:0; }
       tr.setAttribute('material', 'emissive', '#000000');
       tr.setAttribute('material', 'emissiveIntensity', 0);
     });
+
     $('#liquid').setAttribute('visible', false);
     $('#garnish').setAttribute('visible', false);
     $('#p-name').setAttribute('value', 'Choose your Absolut');
@@ -473,39 +947,74 @@ body.film::after { bottom:0; }
     $('#p-note').setAttribute('value', '');
     $('#p-accent').setAttribute('material', 'color', '#0a3fa8');
   }
-  function showEnd() { $('#end').hidden = false; $('#skip').hidden = true; $('#cap').classList.remove('on'); }
+
+  function showEnd() {
+    $('#end').hidden = false;
+    $('#skip').hidden = true;
+    $('#cap').classList.remove('on');
+  }
 
   function playFilm() {
     const run = ++filmRun, cam = $('#cam');
-    setMode('walk'); resetBar();
-    $('#intro').hidden = true; $('#hud').hidden = true; $('#end').hidden = true; $('#skip').hidden = false;
+    setMode('walk');
+    resetBar();
+
+    $('#intro').hidden = true;
+    $('#hud').hidden = true;
+    $('#end').hidden = true;
+    $('#skip').hidden = false;
     document.body.classList.add('film');
+
     cam.setAttribute('look-controls', 'enabled', false);
     cam.setAttribute('wasd-controls', 'enabled', false);
+
     const last = KEYS[KEYS.length - 1][0], t0 = performance.now();
     let poured = false, ended = false;
+
     (function frame(now) {
       if (run !== filmRun) return;
       const t = (now - t0) / 1000, cap = $('#cap');
+
       applyPose(pose(Math.min(t, last)));
+
       const c = CAPS.find((x) => t >= x[0] && t < x[1]);
-      if (c) { cap.textContent = c[2]; cap.classList.add('on'); } else cap.classList.remove('on');
-      if (!poured && t >= POUR_AT) { poured = true; select('original'); }
-      if (!ended && t >= END_CARD_AT) { ended = true; showEnd(); }
+      if (c) {
+        cap.textContent = c[2];
+        cap.classList.add('on');
+      } else {
+        cap.classList.remove('on');
+      }
+
+      if (!poured && t >= POUR_AT) {
+        poured = true;
+        select('original');
+      }
+
+      if (!ended && t >= END_CARD_AT) {
+        ended = true;
+        showEnd();
+      }
+
       if (t < last) requestAnimationFrame(frame);
     })(t0);
   }
+
   function skipFilm() {
     filmRun++;
     if (!state.selected) select('original');
     applyPose(KEYS[KEYS.length - 1]);
     showEnd();
   }
+
   function leaveFilm() {
     filmRun++;
     const cam = $('#cam');
+
     document.body.classList.remove('film');
-    $('#end').hidden = true; $('#skip').hidden = true; $('#cap').classList.remove('on');
+    $('#end').hidden = true;
+    $('#skip').hidden = true;
+    $('#cap').classList.remove('on');
+
     cam.setAttribute('look-controls', 'enabled', true);
     cam.setAttribute('wasd-controls', 'enabled', true);
     cam.object3D.rotation.x = 0;
@@ -515,41 +1024,65 @@ body.film::after { bottom:0; }
   /* Wiring */
   document.addEventListener('DOMContentLoaded', () => {
     build();
-    const scene = $('a-scene'), hit = $('#hit');
 
+    const scene = $('a-scene'), hit = $('#hit');
     const age = $('#age'), goWalk = $('#go-walk'), goTable = $('#go-table');
+
     age.addEventListener('change', () => {
-      document.querySelectorAll('#intro .actions button').forEach((b) => { b.disabled = !age.checked; });
+      document.querySelectorAll('#intro .actions button').forEach((b) => {
+        b.disabled = !age.checked;
+      });
     });
-    const start = (mode) => { $('#intro').hidden = true; $('#hud').hidden = false; setMode(mode); };
+
+    const start = (mode) => {
+      $('#intro').hidden = true;
+      $('#hud').hidden = false;
+      setMode(mode);
+    };
+
     goWalk.addEventListener('click', () => start('walk'));
     goTable.addEventListener('click', () => start('tabletop'));
     $('#go-film').addEventListener('click', playFilm);
     $('#skip').addEventListener('click', skipFilm);
     $('#end-replay').addEventListener('click', playFilm);
-    $('#end-explore').addEventListener('click', () => { leaveFilm(); setMode('walk'); });
-    $('#end-table').addEventListener('click', () => { leaveFilm(); setMode('tabletop'); });
+    $('#end-explore').addEventListener('click', () => {
+      leaveFilm();
+      setMode('walk');
+    });
+    $('#end-table').addEventListener('click', () => {
+      leaveFilm();
+      setMode('tabletop');
+    });
 
-    document.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+    document.querySelectorAll('[data-mode]').forEach((b) =>
+      b.addEventListener('click', () => setMode(b.dataset.mode))
+    );
+
     $('#turn-left').addEventListener('click', () => turn(-Math.PI / 4));
     $('#turn-right').addEventListener('click', () => turn(Math.PI / 4));
 
     window.addEventListener('keydown', (e) => {
-      if ($('#intro').hidden && ['1', '2', '3'].includes(e.key)) select(IDS[Number(e.key) - 1]);
+      if ($('#intro').hidden && ['1', '2', '3'].includes(e.key)) {
+        select(IDS[Number(e.key) - 1]);
+      }
     });
 
     scene.addEventListener('enter-vr', () => {
       if (!scene.is('ar-mode')) return;
-      $('#intro').hidden = true; $('#hud').hidden = false;
+
+      $('#intro').hidden = true;
+      $('#hud').hidden = false;
       setMode('tabletop');
       scene.setAttribute('cursor', 'rayOrigin', 'xrselect');
       hit.setAttribute('ar-hit-test', 'enabled', true);
       hint('Point your phone at a table and tap to place the bar.');
     });
+
     scene.addEventListener('exit-vr', () => {
       scene.setAttribute('cursor', 'rayOrigin', 'mouse');
       hit.setAttribute('ar-hit-test', 'enabled', false);
     });
+
     hit.addEventListener('ar-hit-test-select', () => {
       hit.setAttribute('ar-hit-test', 'enabled', false);
       hint('Placed. Walk around it, then tap a bottle to pour.');
@@ -565,21 +1098,25 @@ body.film::after { bottom:0; }
   <div class="intro-card">
     <h1>Bar Aurora</h1>
     <p class="lede">Evening at the hotel bar, lake outside, marble underfoot. Pull up a stool, pick your Absolut, and watch it poured.</p>
+
     <label class="age">
       <input type="checkbox" id="age">
       <span>I’m of legal drinking age in my country</span>
     </label>
+
     <div class="actions">
       <button id="go-film" type="button" disabled>Watch the film</button>
       <button id="go-walk" type="button" class="ghost" disabled>Explore the bar</button>
       <button id="go-table" type="button" class="ghost" disabled>Place it on my table</button>
     </div>
+
     <p class="fine">Please enjoy Absolut responsibly.</p>
   </div>
 </main>
 
 <div id="cap" class="cap" aria-live="polite"></div>
 <button id="skip" class="skip hud-btn" type="button" hidden>Skip</button>
+
 <section id="end" class="end" hidden>
   <p class="wm">ABSOLUT</p>
   <p class="tag">Choose Absolut.</p>
@@ -594,10 +1131,12 @@ body.film::after { bottom:0; }
 <div id="hud" class="hud" hidden>
   <button type="button" class="hud-btn" data-mode="walk" aria-pressed="true">Walk in</button>
   <button type="button" class="hud-btn" data-mode="tabletop" aria-pressed="false">On the table</button>
+
   <span id="turn" class="turn" hidden>
     <button type="button" class="hud-btn" id="turn-left" aria-label="Turn the bar left">Turn left</button>
     <button type="button" class="hud-btn" id="turn-right" aria-label="Turn the bar right">Turn right</button>
   </span>
+
   <p id="hint" class="hint" role="status">Click a bottle on the bar to have it poured.</p>
 </div>
 
@@ -612,7 +1151,7 @@ body.film::after { bottom:0; }
 
   <!-- Load the Absolut ad image from the same folder as this HTML file -->
   <a-assets>
-    <img id="absolut-ad" src="1e9af1e7-369f-47dc-8ed0-6e85766bc5fe.png" crossorigin="anonymous">
+    <img id="absolut-ad" src="1ad.jpg" crossorigin="anonymous">
   </a-assets>
 
   <a-entity light="type: ambient; color: #ffd7a8; intensity: 0.9"></a-entity>
@@ -627,6 +1166,7 @@ body.film::after { bottom:0; }
   <a-entity id="hit" ar-hit-test="target: #world; enabled: false"></a-entity>
 
   <a-entity id="world">
+
     <a-plane id="floor" class="clickable" teleport-floor rotation="-90 0 0" width="8" height="7" position="0 0 0"
       material="roughness: 0.25; metalness: 0.1" gen-texture="kind: marble; repeat: 1 0.875; size: 1024 1024"></a-plane>
 
@@ -689,10 +1229,12 @@ body.film::after { bottom:0; }
       <a-cylinder position="0 0.053 0" radius="0.004" height="0.09" material="color: #dff1f6; opacity: 0.45; transparent: true; roughness: 0.05; depthWrite: false"></a-cylinder>
       <a-sphere position="0 0.148 0" radius="0.05" theta-start="90" theta-length="90"
         material="color: #dff1f6; opacity: 0.3; transparent: true; roughness: 0.05; side: double; depthWrite: false"></a-sphere>
+
       <a-entity id="liquid" position="0 0.148 0" visible="false">
         <a-sphere class="liq" radius="0.047" theta-start="110" theta-length="70" material="color: #e8f3f8; opacity: 0.92; transparent: true; roughness: 0.1"></a-sphere>
         <a-circle class="liq" radius="0.0442" rotation="-90 0 0" position="0 -0.0161 0" material="color: #e8f3f8; opacity: 0.92; transparent: true; roughness: 0.1"></a-circle>
       </a-entity>
+
       <a-sphere id="garnish" visible="false" position="0.012 0.137 0.01" radius="0.009" material="color: #7a8b2f; roughness: 0.5"></a-sphere>
     </a-entity>
 
@@ -704,6 +1246,7 @@ body.film::after { bottom:0; }
       <a-text id="p-serve" value="Click or tap a bottle on the bar." align="center" color="#c8a25a" width="1.9" position="0 0.02 0.004"></a-text>
       <a-text id="p-note" value="" align="center" color="#d8cdb8" width="1.55" wrap-count="42" position="0 -0.15 0.004"></a-text>
     </a-entity>
+
   </a-entity>
 </a-scene>
 
